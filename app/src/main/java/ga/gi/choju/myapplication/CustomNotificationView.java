@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+// 通知を表示するカスタムビューの制御クラス
 public class CustomNotificationView extends LinearLayout {
     private static final String TAG = "CustomNotificationView";
 
@@ -36,18 +37,23 @@ public class CustomNotificationView extends LinearLayout {
         init(context, attrs, defStyleAttr, defStyleAttr);
     }
 
+    // 初期化処理
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes){
+        // このクラスとcustom_notification_layout.xmlを紐づけ
         inflate(getContext(), R.layout.custom_notification_layout, this);
 
         titleText = findViewById(R.id.titleText);
         bodyText = findViewById(R.id.bodyText);
         icon = findViewById(R.id.iconImageView);
 
+        // layoutファイルでAttributeを設定しているか判別
         if (attrs != null) {
             TypedArray typedArray;
 
             try {
+                // Attributeを取得
                 typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomNotificationView, defStyleAttr, defStyleRes);
+                // それぞれあったら　初期化中に設定
                 setTitleText(typedArray.getString(R.styleable.CustomNotificationView_titleText));
                 setBodyText(typedArray.getString(R.styleable.CustomNotificationView_bodyText));
                 setIcon(typedArray.getDrawable(R.styleable.CustomNotificationView_icon));
@@ -58,6 +64,7 @@ public class CustomNotificationView extends LinearLayout {
         }
     }
 
+    // カスタムビューを操作するためのメソッド郡
     public void setTitleText(CharSequence title) {
         titleText.setText(title);
     }
@@ -68,11 +75,6 @@ public class CustomNotificationView extends LinearLayout {
 
     public void setBodyText(CharSequence body) {
         bodyText.setText(body);
-    }
-
-    @Deprecated
-    public void setBodyText(CharSequence ticker, CharSequence body){
-        bodyText.setText(String.format("%s\n%s", ticker, body));
     }
 
     public void setIcon(Icon icon){

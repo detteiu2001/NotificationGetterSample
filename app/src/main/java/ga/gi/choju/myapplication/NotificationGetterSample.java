@@ -18,6 +18,7 @@ public class NotificationGetterSample extends Application {
             @Override
             public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
                 if (activity instanceof MainActivity) {
+                    // MainActivityが作られたときだけフラグを立てる
                     isMainActivityRunning = true;
                 }
             }
@@ -40,6 +41,7 @@ public class NotificationGetterSample extends Application {
             @Override
             public void onActivityDestroyed(@NonNull Activity activity) {
                 if (activity instanceof MainActivity) {
+                    // MainActivityが完全に終了されたタイミングでフラグを寝かせる
                     isMainActivityRunning = false;
                 }
             }
